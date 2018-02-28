@@ -14,6 +14,33 @@ class Main extends React.Component{
     }
   }
 
+  selectBox = (row , col) => {
+    let gridCopy = arrayClone(this.state.gridFull)
+    gridCopy[row][col] = !gridCopy[row][col]
+
+    this.setState({
+      gridFull: gridCopy
+    })
+  }
+
+  seed = () => {
+    console.log("seed oooo")
+    let gridCopy = arrayClone(this.state.gridFull)
+    for(let i = 0; i < this.rows; i++){
+      for(let j = 0; j < this.cols; j++){
+        if(Math.floor(Math.random() * 4) === 1 ){
+          gridCopy[i][j] = true
+        }
+      }
+    }
+    this.setState({
+      gridFull: gridCopy
+    })
+  }
+
+  componentDidMount(){
+    this.seed()
+  }
   render(){
     return(
       <div>
@@ -28,6 +55,9 @@ class Main extends React.Component{
       </div>
     )
   }
+}
+function arrayClone(arr){
+  return JSON.parse(JSON.stringify(arr))
 }
 
 export default Main
